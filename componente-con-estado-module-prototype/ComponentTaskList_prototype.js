@@ -1,15 +1,16 @@
-export default function Component () {
+export default function Component() {
   //Constructor del Componente
   function Constructor(options) {
+    console.log(options.data);
     this.el = options.el; // Elemento en el HTML
     this.data = options.data; // State Local
     this.template = options.template; // Template del HTML a renderizar
-  };
+  }
 
   //Agregamos los métodos al prototipo del constructor del componente
 
   //Render UI
-  Constructor.prototype.render = function () {
+  Constructor.prototype.render = function() {
     const $el = document.querySelector(this.el);
     if (!$el) return;
     $el.innerHTML = this.template(this.data);
@@ -18,7 +19,9 @@ export default function Component () {
 
   //Actualizar el State de forma reactiva
   Constructor.prototype.setState = function (obj) {
-    for (let key in obj) {
+    console.log(obj);
+    console.log(this.data);
+    for (const key in obj) {
       if (this.data.hasOwnProperty(key)) {
         this.data[key] = obj[key];
       }
@@ -32,4 +35,4 @@ export default function Component () {
   };
 
   return Constructor;
-};
+}
